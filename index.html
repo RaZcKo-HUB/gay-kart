@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    
     <title>Classifica Gay Kart</title>
     <style>
         * {
@@ -142,7 +143,7 @@
             50% { box-shadow: 0 4px 15px rgba(255, 255, 255, 0.4); }
         }
         
-        .ranking-table, .qualifying-table, .teams-table {
+        .ranking-table, .qualifying-table, .teams-table, .calendar-table {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 12px;
             padding: 15px;
@@ -165,7 +166,7 @@
             }
         }
         
-        .position, .qualifying-row, .team-row {
+        .position, .qualifying-row, .team-row, .calendar-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -192,7 +193,7 @@
             }
         }
         
-        .position:hover, .qualifying-row:hover, .team-row:hover {
+        .position:hover, .qualifying-row:hover, .team-row:hover, .calendar-row:hover {
             transform: scale(1.02) translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
             animation: hoverShake 0.3s ease;
@@ -204,7 +205,7 @@
             75% { transform: scale(1.02) translateY(-2px) rotate(-0.5deg); }
         }
         
-        .position::before, .qualifying-row::before, .team-row::before {
+        .position::before, .qualifying-row::before, .team-row::before, .calendar-row::before {
             content: '';
             position: absolute;
             top: 0;
@@ -215,15 +216,14 @@
             transition: left 0.5s;
         }
         
-        .position:hover::before, .qualifying-row:hover::before, .team-row:hover::before {
+        .position:hover::before, .qualifying-row:hover::before, .team-row:hover::before, .calendar-row:hover::before {
             left: 100%;
         }
         
-        .pos-1, .qual-1, .team-1 { 
+        .pos-1, .qual-1, .team-1, .calendar-next { 
             background: linear-gradient(90deg, #ffd700, #ffed4e); 
             color: #000; 
             box-shadow: 0 3px 10px rgba(255, 215, 0, 0.4);
-            /* RIMOSSO: goldGlow animation */
         }
         
         .pos-2, .qual-2, .team-2 { 
@@ -238,7 +238,7 @@
             box-shadow: 0 3px 10px rgba(205, 127, 50, 0.4);
         }
         
-        .pos-4, .qual-4, .team-4 { 
+        .pos-4, .qual-4, .team-4, .calendar-upcoming { 
             background: linear-gradient(90deg, #f0f0f0, #ffffff); 
             color: #333; 
         }
@@ -263,7 +263,13 @@
             color: #333; 
         }
         
-        .points, .time, .team-points {
+        .calendar-completed {
+            background: linear-gradient(90deg, #e8e8e8, #f8f8f8); 
+            color: #666;
+            opacity: 0.8;
+        }
+        
+        .points, .time, .team-points, .calendar-date {
             font-size: 14px;
             color: #e10600;
             font-weight: bold;
@@ -271,10 +277,9 @@
             padding: 4px 10px;
             border-radius: 15px;
             transition: all 0.3s ease;
-            /* RIMOSSO: numberPulse animation */
         }
         
-        .position:hover .points, .qualifying-row:hover .time, .team-row:hover .team-points {
+        .position:hover .points, .qualifying-row:hover .time, .team-row:hover .team-points, .calendar-row:hover .calendar-date {
             transform: scale(1.1);
             background: rgba(255, 255, 255, 0.9);
             animation: pointsJump 0.5s ease;
@@ -285,7 +290,7 @@
             50% { transform: scale(1.2) translateY(-2px); }
         }
         
-        .driver-info, .team-info {
+        .driver-info, .team-info, .calendar-info {
             display: flex;
             align-items: center;
             gap: 8px;
@@ -309,6 +314,21 @@
             font-size: 11px;
             color: #666;
             margin-top: 3px;
+        }
+        
+        .calendar-location {
+            font-size: 12px;
+            color: #666;
+            margin-top: 3px;
+        }
+        
+        .calendar-round {
+            font-size: 11px;
+            color: #e10600;
+            background: rgba(225, 6, 0, 0.1);
+            padding: 2px 6px;
+            border-radius: 10px;
+            margin-left: 8px;
         }
         
         .podium {
@@ -345,7 +365,6 @@
             position: relative;
             transition: all 0.5s ease;
             cursor: pointer;
-            /* RIMOSSO: podiumBounce animation - PODIO FERMO */
         }
         
         .podium-step:hover {
@@ -391,7 +410,6 @@
             background: rgba(0,0,0,0.2);
             padding: 2px 8px;
             border-radius: 12px;
-            /* RIMOSSO: pointsGlow animation - PUNTI FERMI */
         }
         
         .podium-position {
@@ -406,7 +424,6 @@
             border-radius: 50%;
             background: rgba(0,0,0,0.7);
             color: white;
-            /* RIMOSSO: positionSpin animation - NUMERO PODIO FERMO */
         }
         
         .f1-logo {
@@ -502,7 +519,7 @@
             opacity: 0.8;
         }
         
-        .qualifying-header, .teams-header {
+        .qualifying-header, .teams-header, .calendar-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -609,7 +626,7 @@
                 height: 70px;
             }
             
-            .position, .qualifying-row, .team-row {
+            .position, .qualifying-row, .team-row, .calendar-row {
                 padding: 10px 12px;
                 font-size: 14px;
             }
@@ -623,7 +640,7 @@
                 font-size: 12px;
             }
             
-            .points, .time, .team-points {
+            .points, .time, .team-points, .calendar-date {
                 font-size: 12px;
                 padding: 3px 8px;
             }
@@ -706,6 +723,7 @@
             <button class="btn" id="btn-ranking">Piloti</button>
             <button class="btn" id="btn-qualifying">Qualifiche</button>
             <button class="btn" id="btn-teams">Scuderie</button>
+            <button class="btn" id="btn-calendar">Calendario</button>
             <button class="btn" id="btn-stats">Statistiche</button>
         </div>
         
@@ -883,6 +901,67 @@
             </div>
         </div>
         
+        <div class="calendar-table" id="calendar-table">
+            <div class="calendar-header">
+                <span>CALENDARIO GARE 2025</span>
+                <span>PROSSIMA GARA: GRAN PREMIO D'ITALIA</span>
+            </div>
+            <div class="calendar-row calendar-next">
+                <div class="calendar-info">
+                    <div>
+                        <span>GRAN PREMIO D'ITALIA <span class="calendar-round">Round 1</span></span>
+                        <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
+                    </div>
+                </div>
+                <span class="calendar-date">4   OTT</span>
+            </div>
+            <div class="calendar-row calendar-upcoming">
+                <div class="calendar-info">
+                    <div>
+                        <span>GRAN PREMIO DI BELGIO <span class="calendar-round">Round 2</span></span>
+                        <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
+                    </div>
+                </div>
+                <span class="calendar-date">11 OTT</span>
+            </div>
+            <div class="calendar-row calendar-upcoming">
+                <div class="calendar-info">
+                    <div>
+                        <span>GRAN PREMIO DI GERMANIA <span class="calendar-round">Round 3</span></span>
+                        <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
+                    </div>
+                </div>
+                <span class="calendar-date">18 OTT</span>
+            </div>
+            <div class="calendar-row calendar-upcoming">
+                <div class="calendar-info">
+                    <div>
+                        <span>GRAN PREMIO DI SPAGNA <span class="calendar-round">Round 4</span></span>
+                        <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
+                    </div>
+                </div>
+                <span class="calendar-date">25 OTT</span>
+            </div>
+            <div class="calendar-row calendar-upcoming">
+                <div class="calendar-info">
+                    <div>
+                        <span>GRAN PREMIO DI FRANCIA <span class="calendar-round">Round 5</span></span>
+                        <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
+                    </div>
+                </div>
+                <span class="calendar-date">1 NOV</span>
+            </div>
+            <div class="calendar-row calendar-completed">
+                <div class="calendar-info">
+                    <div>
+                        <span>GRAN PREMIO DEL PANZONE <span class="calendar-round">Round 0</span></span>
+                        <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
+                    </div>
+                </div>
+                <span class="calendar-date">COMPLETATO</span>
+            </div>
+        </div>
+        
         <div class="stats-panel" id="stats-panel">
             <div class="stats-title">STATISTICHE CLASSIFICA</div>
             <div class="stats-content">
@@ -917,11 +996,13 @@
             const btnRanking = document.getElementById('btn-ranking');
             const btnQualifying = document.getElementById('btn-qualifying');
             const btnTeams = document.getElementById('btn-teams');
+            const btnCalendar = document.getElementById('btn-calendar');
             const btnStats = document.getElementById('btn-stats');
             const podium = document.querySelector('.podium');
             const rankingTable = document.getElementById('ranking-table');
             const qualifyingTable = document.getElementById('qualifying-table');
             const teamsTable = document.getElementById('teams-table');
+            const calendarTable = document.getElementById('calendar-table');
             const statsPanel = document.getElementById('stats-panel');
             
             // Gestione dei pulsanti di visualizzazione
@@ -931,6 +1012,7 @@
                 rankingTable.style.display = 'none';
                 qualifyingTable.style.display = 'none';
                 teamsTable.style.display = 'none';
+                calendarTable.style.display = 'none';
                 statsPanel.style.display = 'none';
             });
             
@@ -940,6 +1022,7 @@
                 rankingTable.style.display = 'block';
                 qualifyingTable.style.display = 'none';
                 teamsTable.style.display = 'none';
+                calendarTable.style.display = 'none';
                 statsPanel.style.display = 'none';
             });
             
@@ -949,6 +1032,7 @@
                 rankingTable.style.display = 'none';
                 qualifyingTable.style.display = 'block';
                 teamsTable.style.display = 'none';
+                calendarTable.style.display = 'none';
                 statsPanel.style.display = 'none';
             });
             
@@ -958,6 +1042,17 @@
                 rankingTable.style.display = 'none';
                 qualifyingTable.style.display = 'none';
                 teamsTable.style.display = 'block';
+                calendarTable.style.display = 'none';
+                statsPanel.style.display = 'none';
+            });
+            
+            btnCalendar.addEventListener('click', function() {
+                setActiveButton(btnCalendar);
+                podium.style.display = 'none';
+                rankingTable.style.display = 'none';
+                qualifyingTable.style.display = 'none';
+                teamsTable.style.display = 'none';
+                calendarTable.style.display = 'block';
                 statsPanel.style.display = 'none';
             });
             
@@ -967,11 +1062,12 @@
                 rankingTable.style.display = 'none';
                 qualifyingTable.style.display = 'none';
                 teamsTable.style.display = 'none';
+                calendarTable.style.display = 'none';
                 statsPanel.style.display = 'block';
             });
             
             function setActiveButton(activeBtn) {
-                [btnPodium, btnRanking, btnQualifying, btnTeams, btnStats].forEach(btn => {
+                [btnPodium, btnRanking, btnQualifying, btnTeams, btnCalendar, btnStats].forEach(btn => {
                     btn.classList.remove('active');
                 });
                 activeBtn.classList.add('active');
@@ -981,10 +1077,11 @@
             rankingTable.style.display = 'none';
             qualifyingTable.style.display = 'none';
             teamsTable.style.display = 'none';
+            calendarTable.style.display = 'none';
             statsPanel.style.display = 'none';
             
             // Aggiungiamo effetti hover avanzati per le posizioni
-            document.querySelectorAll('.position, .qualifying-row, .team-row').forEach(position => {
+            document.querySelectorAll('.position, .qualifying-row, .team-row, .calendar-row').forEach(position => {
                 position.addEventListener('mouseenter', function() {
                     this.style.zIndex = '10';
                 });
