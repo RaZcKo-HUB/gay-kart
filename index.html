@@ -72,32 +72,26 @@
         .controls {
             display: flex;
             justify-content: space-between;
-            gap: 6px;
+            gap: 8px;
             margin-bottom: 20px;
-            flex-wrap: nowrap;
+            flex-wrap: wrap;
             width: 100%;
             max-width: 100%;
-            overflow-x: auto;
             padding: 5px 0;
-            -webkit-overflow-scrolling: touch;
-        }
-        
-        .controls::-webkit-scrollbar {
-            display: none;
         }
         
         .btn {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid white;
             color: white;
-            padding: 10px 8px;
+            padding: 12px 10px;
             border-radius: 20px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 13px;
+            font-size: 14px;
             flex: 1;
-            min-width: 0;
+            min-width: 80px;
             text-align: center;
             white-space: nowrap;
             flex-shrink: 0;
@@ -636,8 +630,9 @@
             }
             
             .btn {
-                padding: 8px 6px;
+                padding: 10px 8px;
                 font-size: 12px;
+                min-width: 70px;
             }
             
             .points, .time, .team-points, .calendar-date {
@@ -688,22 +683,27 @@
             }
         }
         
-        /* Ottimizzazioni specifiche per i pulsanti */
-        @media (max-width: 400px) {
+        /* Layout a due righe per i pulsanti su schermi piccoli */
+        @media (max-width: 480px) {
             .controls {
-                gap: 4px;
+                flex-wrap: wrap;
+                gap: 6px;
             }
             
             .btn {
+                flex: 1 0 calc(33.333% - 12px);
+                min-width: calc(33.333% - 12px);
+                font-size: 13px;
                 padding: 10px 6px;
-                font-size: 12px;
             }
         }
         
         @media (max-width: 350px) {
             .btn {
+                flex: 1 0 calc(50% - 6px);
+                min-width: calc(50% - 6px);
+                font-size: 12px;
                 padding: 10px 4px;
-                font-size: 11px;
             }
         }
     </style>
@@ -722,7 +722,7 @@
             <button class="btn active" id="btn-podium">Podio</button>
             <button class="btn" id="btn-ranking">Piloti</button>
             <button class="btn" id="btn-qualifying">Qualifiche</button>
-            <button class="btn" id="btn-teams">Scuderie</button> 
+            <button class="btn" id="btn-teams">Scuderie</button>
             <button class="btn" id="btn-calendar">Calendario</button>
             <button class="btn" id="btn-stats">Statistiche</button>
         </div>
@@ -913,7 +913,7 @@
                         <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
                     </div>
                 </div>
-                <span class="calendar-date">4   OTT</span>
+                <span class="calendar-date">4 OTT</span>
             </div>
             <div class="calendar-row calendar-upcoming">
                 <div class="calendar-info">
@@ -927,7 +927,7 @@
             <div class="calendar-row calendar-upcoming">
                 <div class="calendar-info">
                     <div>
-                        <span>GRAN PREMIO DI GERMANIA <span class="calendar-round">Round 3</span></span>
+                        <span>GRAN PREMIO DI LONDRA <span class="calendar-round">Round 3</span></span>
                         <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
                     </div>
                 </div>
@@ -954,7 +954,7 @@
             <div class="calendar-row calendar-completed">
                 <div class="calendar-info">
                     <div>
-                        <span>GRAN PREMIO DEL PANZONE <span class="calendar-round">Round 0</span></span>
+                        <span>GRAN PREMIO D'INGHILTERRA <span class="calendar-round">Round 0</span></span>
                         <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
                     </div>
                 </div>
