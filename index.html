@@ -562,7 +562,155 @@
             align-items: center;
             gap: 8px;
         }
-        
+
+        /* PROFILI PILOTA */
+        .driver-profile {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            margin-bottom: 15px;
+            width: 100%;
+            animation: slideInUp 0.6s ease;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e10600;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e10600, #000000);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e10600;
+            margin-bottom: 5px;
+        }
+
+        .profile-team {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 10px;
+        }
+
+        .profile-stat {
+            background: #f0f0f0;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #e10600;
+        }
+
+        .profile-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .detail-card {
+            background: #f8f8f8;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #e10600;
+        }
+
+        .detail-title {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .detail-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+        }
+
+        .profile-performance {
+            margin-top: 20px;
+        }
+
+        .performance-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e10600;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .performance-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .performance-stat {
+            background: linear-gradient(135deg, #e10600, #ff4444);
+            color: white;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .performance-value {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .performance-label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .back-button {
+            background: #e10600;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: #c10500;
+            transform: translateY(-2px);
+        }
+
         /* Animazione di caricamento */
         .loading {
             position: fixed;
@@ -638,6 +786,25 @@
             .points, .time, .team-points, .calendar-date {
                 font-size: 12px;
                 padding: 3px 8px;
+            }
+
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-avatar {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+
+            .profile-name {
+                font-size: 20px;
+            }
+
+            .profile-details {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -727,68 +894,70 @@
             <button class="btn" id="btn-stats">Statistiche</button>
         </div>
         
-        <div class="podium">
-            <div class="podium-step podium-1">
+        <!-- PODIO -->
+        <div class="podium" id="podium-section">
+            <div class="podium-step podium-1" data-driver="lorenzo">
                 <div class="podium-position">1</div>
                 <div class="podium-name">LORENZO</div>
                 <div class="podium-points">8 PTS</div>
             </div>
-            <div class="podium-step podium-2">
+            <div class="podium-step podium-2" data-driver="luigi">
                 <div class="podium-position">2</div>
                 <div class="podium-name">LUIGI</div>
                 <div class="podium-points">7 PTS</div>
             </div>
-            <div class="podium-step podium-3">
+            <div class="podium-step podium-3" data-driver="michael">
                 <div class="podium-position">3</div>
                 <div class="podium-name">MICHAEL</div>
                 <div class="podium-points">6 PTS</div>
             </div>
         </div>
         
+        <!-- CLASSIFICA PILOTI -->
         <div class="ranking-table" id="ranking-table">
-            <div class="position pos-1">
+            <div class="position pos-1" data-driver="lorenzo">
                 <div class="driver-info">
                     <span>🥇 1. LORENZO</span>
                 </div>
                 <span class="points">8 PTS</span>
             </div>
-            <div class="position pos-2">
+            <div class="position pos-2" data-driver="luigi">
                 <div class="driver-info">
                     <span>🥈 2. LUIGI</span>
                 </div>
                 <span class="points">7 PTS</span>
             </div>
-            <div class="position pos-3">
+            <div class="position pos-3" data-driver="michael">
                 <div class="driver-info">
                     <span>🥉 3. MICHAEL</span>
                 </div>
                 <span class="points">6 PTS</span>
             </div>
-            <div class="position pos-4">
+            <div class="position pos-4" data-driver="morgan">
                 <div class="driver-info">
                     <span>4. MORGAN</span>
                 </div>
                 <span class="points">5 PTS</span>
             </div>
-            <div class="position pos-5">
+            <div class="position pos-5" data-driver="vittorio">
                 <div class="driver-info">
                     <span>5. VITTORIO</span>
                 </div>
                 <span class="points">4 PTS</span>
             </div>
-            <div class="position pos-6">
+            <div class="position pos-6" data-driver="francesco">
                 <div class="driver-info">
                     <span>6. FRANCESCO</span>
                 </div>
                 <span class="points">3 PTS</span>
             </div>
-            <div class="position pos-7">
+            <div class="position pos-7" data-driver="nicola">
                 <div class="driver-info">
                     <span>7. NICOLA</span>
                 </div>
                 <span class="points">2 PTS</span>
             </div>
-            <div class="position pos-8">
+            <div class="position pos-8" data-driver="edoardo">
                 <div class="driver-info">
                     <span>8. EDOARDO</span>
                 </div>
@@ -796,60 +965,61 @@
             </div>
         </div>
         
+        <!-- QUALIFICHE -->
         <div class="qualifying-table" id="qualifying-table">
             <div class="qualifying-header">
                 <span>RISULTATI QUALIFICHE <span class="qualifying-session">Q1</span></span>
                 <span>MIGLIOR TEMPO: 1:22.304</span>
             </div>
-            <div class="qualifying-row qual-1">
+            <div class="qualifying-row qual-1" data-driver="vittorio">
                 <div class="qualifying-info">
                     <span>1. VITTORIO</span>
                 </div>
                 <span class="time">1:22.304</span>
             </div>
-            <div class="qualifying-row qual-2">
+            <div class="qualifying-row qual-2" data-driver="lorenzo">
                 <div class="qualifying-info">
                     <span>2. LORENZO</span>
                     <span class="qualifying-difference">+0.125</span>
                 </div>
                 <span class="time">1:22.429</span>
             </div>
-            <div class="qualifying-row qual-3">
+            <div class="qualifying-row qual-3" data-driver="luigi">
                 <div class="qualifying-info">
                     <span>3. LUIGI</span>
                     <span class="qualifying-difference">+0.241</span>
                 </div>
                 <span class="time">1:22.545</span>
             </div>
-            <div class="qualifying-row qual-4">
+            <div class="qualifying-row qual-4" data-driver="michael">
                 <div class="qualifying-info">
                     <span>4. MICHAEL</span>
                     <span class="qualifying-difference">+0.367</span>
                 </div>
                 <span class="time">1:22.671</span>
             </div>
-            <div class="qualifying-row qual-5">
+            <div class="qualifying-row qual-5" data-driver="morgan">
                 <div class="qualifying-info">
                     <span>5. MORGAN</span>
                     <span class="qualifying-difference">+0.512</span>
                 </div>
                 <span class="time">1:22.816</span>
             </div>
-            <div class="qualifying-row qual-6">
+            <div class="qualifying-row qual-6" data-driver="francesco">
                 <div class="qualifying-info">
                     <span>6. FRANCESCO</span>
                     <span class="qualifying-difference">+0.698</span>
                 </div>
                 <span class="time">1:23.002</span>
             </div>
-            <div class="qualifying-row qual-7">
+            <div class="qualifying-row qual-7" data-driver="nicola">
                 <div class="qualifying-info">
                     <span>7. NICOLA</span>
                     <span class="qualifying-difference">+0.854</span>
                 </div>
                 <span class="time">1:23.158</span>
             </div>
-            <div class="qualifying-row qual-8">
+            <div class="qualifying-row qual-8" data-driver="edoardo">
                 <div class="qualifying-info">
                     <span>8. EDOARDO</span>
                     <span class="qualifying-difference">+1.203</span>
@@ -858,6 +1028,7 @@
             </div>
         </div>
         
+        <!-- SCUDERIE -->
         <div class="teams-table" id="teams-table">
             <div class="teams-header">
                 <span>CLASSIFICA SCUDERIE</span>
@@ -901,67 +1072,69 @@
             </div>
         </div>
         
+        <!-- CALENDARIO -->
         <div class="calendar-table" id="calendar-table">
             <div class="calendar-header">
-                <span>CALENDARIO GARE 2025</span>
+                <span>CALENDARIO GARE 2024</span>
                 <span>PROSSIMA GARA: GRAN PREMIO D'ITALIA</span>
             </div>
             <div class="calendar-row calendar-next">
                 <div class="calendar-info">
                     <div>
-                        <span>GRAN PREMIO D'ITALIA   <span class="calendar-round">Round 1</span></span>
-                        <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
+                        <span>GRAN PREMIO D'ITALIA <span class="calendar-round">Round 1</span></span>
+                        <div class="calendar-location">Autodromo Nazionale Monza, Italia</div>
                     </div>
                 </div>
-                <span class="calendar-date">4 OTT</span>
+                <span class="calendar-date">15 SET</span>
             </div>
             <div class="calendar-row calendar-upcoming">
                 <div class="calendar-info">
                     <div>
                         <span>GRAN PREMIO DI BELGIO <span class="calendar-round">Round 2</span></span>
-                        <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
+                        <div class="calendar-location">Circuit de Spa-Francorchamps, Belgio</div>
                     </div>
                 </div>
-                <span class="calendar-date">11 OTT</span>
+                <span class="calendar-date">22 SET</span>
             </div>
             <div class="calendar-row calendar-upcoming">
                 <div class="calendar-info">
                     <div>
-                        <span>GRAN PREMIO DI LONDRA <span class="calendar-round">Round 3</span></span>
-                        <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
+                        <span>GRAN PREMIO DI GERMANIA <span class="calendar-round">Round 3</span></span>
+                        <div class="calendar-location">Hockenheimring, Germania</div>
                     </div>
                 </div>
-                <span class="calendar-date">18 OTT</span>
+                <span class="calendar-date">29 SET</span>
             </div>
             <div class="calendar-row calendar-upcoming">
                 <div class="calendar-info">
                     <div>
                         <span>GRAN PREMIO DI SPAGNA <span class="calendar-round">Round 4</span></span>
-                        <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
+                        <div class="calendar-location">Circuit de Barcelona-Catalunya, Spagna</div>
                     </div>
                 </div>
-                <span class="calendar-date">25 OTT</span>
+                <span class="calendar-date">6 OTT</span>
             </div>
             <div class="calendar-row calendar-upcoming">
                 <div class="calendar-info">
                     <div>
                         <span>GRAN PREMIO DI FRANCIA <span class="calendar-round">Round 5</span></span>
-                        <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
+                        <div class="calendar-location">Circuit Paul Ricard, Francia</div>
                     </div>
                 </div>
-                <span class="calendar-date">1 NOV</span>
+                <span class="calendar-date">13 OTT</span>
             </div>
             <div class="calendar-row calendar-completed">
                 <div class="calendar-info">
                     <div>
                         <span>GRAN PREMIO D'INGHILTERRA <span class="calendar-round">Round 0</span></span>
-                        <div class="calendar-location">Kartodromo Nazionale Giulianova, Italia</div>
+                        <div class="calendar-location">Silverstone Circuit, Regno Unito</div>
                     </div>
                 </div>
                 <span class="calendar-date">COMPLETATO</span>
             </div>
         </div>
         
+        <!-- STATISTICHE -->
         <div class="stats-panel" id="stats-panel">
             <div class="stats-title">STATISTICHE CLASSIFICA</div>
             <div class="stats-content">
@@ -983,9 +1156,188 @@
                 </div>
             </div>
         </div>
+
+        <!-- PROFILI PILOTA -->
+        <div class="driver-profile" id="profile-lorenzo">
+            <div class="profile-header">
+                <div class="profile-avatar">L</div>
+                <div class="profile-info">
+                    <div class="profile-name">LORENZO</div>
+                    <div class="profile-team">FIAT - #1</div>
+                    <div class="profile-stats">
+                        <div class="profile-stat">1° in Classifica</div>
+                        <div class="profile-stat">8 Punti</div>
+                        <div class="profile-stat">1 Vittoria</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-details">
+                <div class="detail-card">
+                    <div class="detail-title">Posizione Media</div>
+                    <div class="detail-value">2.5</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-title">Gare Completate</div>
+                    <div class="detail-value">2</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-title">Miglior Posizione</div>
+                    <div class="detail-value">1°</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-title">Pole Position</div>
+                    <div class="detail-value">0</div>
+                </div>
+            </div>
+
+            <div class="profile-performance">
+                <div class="performance-title">STATISTICHE PERFORMANCE</div>
+                <div class="performance-stats">
+                    <div class="performance-stat">
+                        <div class="performance-value">85%</div>
+                        <div class="performance-label">Finitura a Punti</div>
+                    </div>
+                    <div class="performance-stat">
+                        <div class="performance-value">1.2s</div>
+                        <div class="performance-label">Giro Veloce Medio</div>
+                    </div>
+                    <div class="performance-stat">
+                        <div class="performance-value">3</div>
+                        <div class="performance-label">Sorpassi</div>
+                    </div>
+                    <div class="performance-stat">
+                        <div class="performance-value">92%</div>
+                        <div class="performance-label">Affidabilità</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="back-button" onclick="goBackToPreviousSection()">Torna alla Classifica</button>
+        </div>
+
+        <div class="driver-profile" id="profile-luigi">
+            <div class="profile-header">
+                <div class="profile-avatar">L</div>
+                <div class="profile-info">
+                    <div class="profile-name">LUIGI</div>
+                    <div class="profile-team">FORD - #2</div>
+                    <div class="profile-stats">
+                        <div class="profile-stat">2° in Classifica</div>
+                        <div class="profile-stat">7 Punti</div>
+                        <div class="profile-stat">0 Vittorie</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-details">
+                <div class="detail-card">
+                    <div class="detail-title">Posizione Media</div>
+                    <div class="detail-value">3.0</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-title">Gare Completate</div>
+                    <div class="detail-value">2</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-title">Miglior Posizione</div>
+                    <div class="detail-value">2°</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-title">Pole Position</div>
+                    <div class="detail-value">0</div>
+                </div>
+            </div>
+
+            <div class="profile-performance">
+                <div class="performance-title">STATISTICHE PERFORMANCE</div>
+                <div class="performance-stats">
+                    <div class="performance-stat">
+                        <div class="performance-value">75%</div>
+                        <div class="performance-label">Finitura a Punti</div>
+                    </div>
+                    <div class="performance-stat">
+                        <div class="performance-value">1.4s</div>
+                        <div class="performance-label">Giro Veloce Medio</div>
+                    </div>
+                    <div class="performance-stat">
+                        <div class="performance-value">5</div>
+                        <div class="performance-label">Sorpassi</div>
+                    </div>
+                    <div class="performance-stat">
+                        <div class="performance-value">88%</div>
+                        <div class="performance-label">Affidabilità</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="back-button" onclick="goBackToPreviousSection()">Torna alla Classifica</button>
+        </div>
+
+        <div class="driver-profile" id="profile-michael">
+            <div class="profile-header">
+                <div class="profile-avatar">M</div>
+                <div class="profile-info">
+                    <div class="profile-name">MICHAEL</div>
+                    <div class="profile-team">FORD - #3</div>
+                    <div class="profile-stats">
+                        <div class="profile-stat">3° in Classifica</div>
+                        <div class="profile-stat">6 Punti</div>
+                        <div class="profile-stat">0 Vittorie</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="profile-details">
+                <div class="detail-card">
+                    <div class="detail-title">Posizione Media</div>
+                    <div class="detail-value">3.5</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-title">Gare Completate</div>
+                    <div class="detail-value">2</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-title">Miglior Posizione</div>
+                    <div class="detail-value">3°</div>
+                </div>
+                <div class="detail-card">
+                    <div class="detail-title">Pole Position</div>
+                    <div class="detail-value">0</div>
+                </div>
+            </div>
+
+            <div class="profile-performance">
+                <div class="performance-title">STATISTICHE PERFORMANCE</div>
+                <div class="performance-stats">
+                    <div class="performance-stat">
+                        <div class="performance-value">70%</div>
+                        <div class="performance-label">Finitura a Punti</div>
+                    </div>
+                    <div class="performance-stat">
+                        <div class="performance-value">1.6s</div>
+                        <div class="performance-label">Giro Veloce Medio</div>
+                    </div>
+                    <div class="performance-stat">
+                        <div class="performance-value">2</div>
+                        <div class="performance-label">Sorpassi</div>
+                    </div>
+                    <div class="performance-stat">
+                        <div class="performance-value">85%</div>
+                        <div class="performance-label">Affidabilità</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="back-button" onclick="goBackToPreviousSection()">Torna alla Classifica</button>
+        </div>
+        
     </div>
 
     <script>
+        // Variabile per tenere traccia della sezione precedente
+        let previousSection = 'podium';
+
         document.addEventListener('DOMContentLoaded', function() {
             // Rimuove l'animazione di caricamento
             setTimeout(() => {
@@ -998,72 +1350,36 @@
             const btnTeams = document.getElementById('btn-teams');
             const btnCalendar = document.getElementById('btn-calendar');
             const btnStats = document.getElementById('btn-stats');
-            const podium = document.querySelector('.podium');
-            const rankingTable = document.getElementById('ranking-table');
-            const qualifyingTable = document.getElementById('qualifying-table');
-            const teamsTable = document.getElementById('teams-table');
-            const calendarTable = document.getElementById('calendar-table');
-            const statsPanel = document.getElementById('stats-panel');
             
             // Gestione dei pulsanti di visualizzazione
             btnPodium.addEventListener('click', function() {
+                showSection('podium');
                 setActiveButton(btnPodium);
-                podium.style.display = 'flex';
-                rankingTable.style.display = 'none';
-                qualifyingTable.style.display = 'none';
-                teamsTable.style.display = 'none';
-                calendarTable.style.display = 'none';
-                statsPanel.style.display = 'none';
             });
             
             btnRanking.addEventListener('click', function() {
+                showSection('ranking');
                 setActiveButton(btnRanking);
-                podium.style.display = 'none';
-                rankingTable.style.display = 'block';
-                qualifyingTable.style.display = 'none';
-                teamsTable.style.display = 'none';
-                calendarTable.style.display = 'none';
-                statsPanel.style.display = 'none';
             });
             
             btnQualifying.addEventListener('click', function() {
+                showSection('qualifying');
                 setActiveButton(btnQualifying);
-                podium.style.display = 'none';
-                rankingTable.style.display = 'none';
-                qualifyingTable.style.display = 'block';
-                teamsTable.style.display = 'none';
-                calendarTable.style.display = 'none';
-                statsPanel.style.display = 'none';
             });
             
             btnTeams.addEventListener('click', function() {
+                showSection('teams');
                 setActiveButton(btnTeams);
-                podium.style.display = 'none';
-                rankingTable.style.display = 'none';
-                qualifyingTable.style.display = 'none';
-                teamsTable.style.display = 'block';
-                calendarTable.style.display = 'none';
-                statsPanel.style.display = 'none';
             });
             
             btnCalendar.addEventListener('click', function() {
+                showSection('calendar');
                 setActiveButton(btnCalendar);
-                podium.style.display = 'none';
-                rankingTable.style.display = 'none';
-                qualifyingTable.style.display = 'none';
-                teamsTable.style.display = 'none';
-                calendarTable.style.display = 'block';
-                statsPanel.style.display = 'none';
             });
             
             btnStats.addEventListener('click', function() {
+                showSection('stats');
                 setActiveButton(btnStats);
-                podium.style.display = 'none';
-                rankingTable.style.display = 'none';
-                qualifyingTable.style.display = 'none';
-                teamsTable.style.display = 'none';
-                calendarTable.style.display = 'none';
-                statsPanel.style.display = 'block';
             });
             
             function setActiveButton(activeBtn) {
@@ -1073,24 +1389,115 @@
                 activeBtn.classList.add('active');
             }
             
-            // Inizialmente nascondiamo tutto tranne il podio
-            rankingTable.style.display = 'none';
-            qualifyingTable.style.display = 'none';
-            teamsTable.style.display = 'none';
-            calendarTable.style.display = 'none';
-            statsPanel.style.display = 'none';
+            // Inizialmente mostra solo il podio
+            showSection('podium');
             
-            // Aggiungiamo effetti hover avanzati per le posizioni
-            document.querySelectorAll('.position, .qualifying-row, .team-row, .calendar-row').forEach(position => {
-                position.addEventListener('mouseenter', function() {
-                    this.style.zIndex = '10';
-                });
-                
-                position.addEventListener('mouseleave', function() {
-                    this.style.zIndex = '1';
+            // Aggiungiamo click listener per i piloti
+            document.querySelectorAll('.position, .podium-step, .qualifying-row').forEach(element => {
+                element.addEventListener('click', function() {
+                    const driver = this.getAttribute('data-driver');
+                    if (driver) {
+                        // Salva la sezione corrente prima di mostrare il profilo
+                        previousSection = getCurrentSection();
+                        showDriverProfile(driver);
+                    }
                 });
             });
         });
+
+        function showSection(section) {
+            // Nascondi tutto
+            hideAllSections();
+            
+            // Riabilita i pulsanti della navbar
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.style.opacity = '1';
+                btn.style.pointerEvents = 'auto';
+            });
+            
+            // Mostra la sezione richiesta
+            switch(section) {
+                case 'podium':
+                    document.getElementById('podium-section').style.display = 'flex';
+                    previousSection = 'podium';
+                    break;
+                case 'ranking':
+                    document.getElementById('ranking-table').style.display = 'block';
+                    previousSection = 'ranking';
+                    break;
+                case 'qualifying':
+                    document.getElementById('qualifying-table').style.display = 'block';
+                    previousSection = 'qualifying';
+                    break;
+                case 'teams':
+                    document.getElementById('teams-table').style.display = 'block';
+                    previousSection = 'teams';
+                    break;
+                case 'calendar':
+                    document.getElementById('calendar-table').style.display = 'block';
+                    previousSection = 'calendar';
+                    break;
+                case 'stats':
+                    document.getElementById('stats-panel').style.display = 'block';
+                    previousSection = 'stats';
+                    break;
+            }
+        }
+
+        function getCurrentSection() {
+            if (document.getElementById('podium-section').style.display === 'flex') return 'podium';
+            if (document.getElementById('ranking-table').style.display === 'block') return 'ranking';
+            if (document.getElementById('qualifying-table').style.display === 'block') return 'qualifying';
+            if (document.getElementById('teams-table').style.display === 'block') return 'teams';
+            if (document.getElementById('calendar-table').style.display === 'block') return 'calendar';
+            if (document.getElementById('stats-panel').style.display === 'block') return 'stats';
+            return 'podium'; // default
+        }
+
+        function showDriverProfile(driverId) {
+            // Nascondi tutte le sezioni principali
+            hideAllMainSections();
+            
+            // Mostra il profilo del pilota
+            const profile = document.getElementById(`profile-${driverId}`);
+            if (profile) {
+                profile.style.display = 'block';
+            }
+            
+            // Disabilita temporaneamente i pulsanti della navbar
+            document.querySelectorAll('.btn').forEach(btn => {
+                btn.style.opacity = '0.6';
+                btn.style.pointerEvents = 'none';
+            });
+        }
+
+        function goBackToPreviousSection() {
+            // Nascondi tutti i profili
+            hideAllProfiles();
+            
+            // Ripristina la sezione precedente
+            showSection(previousSection);
+        }
+
+        function hideAllSections() {
+            hideAllMainSections();
+            hideAllProfiles();
+        }
+
+        function hideAllMainSections() {
+            document.getElementById('podium-section').style.display = 'none';
+            document.getElementById('ranking-table').style.display = 'none';
+            document.getElementById('qualifying-table').style.display = 'none';
+            document.getElementById('teams-table').style.display = 'none';
+            document.getElementById('calendar-table').style.display = 'none';
+            document.getElementById('stats-panel').style.display = 'none';
+        }
+
+        function hideAllProfiles() {
+            document.querySelectorAll('.driver-profile').forEach(profile => {
+                profile.style.display = 'none';
+            });
+        }
     </script>
 </body>
 </html>
